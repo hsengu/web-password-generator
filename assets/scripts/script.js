@@ -1,6 +1,6 @@
 // Function to generate password based on chosen criteria
 function generatePassword() {
-  var userChoices = promptUserCriteria();
+  var userChoices = getUserCriteria();
   var characterOptions = ["abcdefghijklmnopqrstuvwxyz","1234567890"," !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"];
   var selectedOptions = "";
   var password = "";
@@ -25,28 +25,25 @@ function generatePassword() {
   return password;
 }
 
-// Function for handling prompts and collecting user inputs.
-function promptUserCriteria() {
-  var validInputs = false;
+// Function for handling user selected password criteria.
+function getUserCriteria() {
+  var choices;
+  var passwordLength = document.querySelector("#length-input").value;
+  
+  if(passwordLength < 8 || passwordLength > 128) {
+    alert("Please specify a valid length of your desired password.\nThis should be between 8 and 128 characters.");
+    return;
+  }
 
-  //Loop until user inputs valid selections
-  while(!validInputs) {
-    var passwordLength = window.prompt("Please enter the length of your desired password.\nThis should be between 8 and 128 characters.");
-    
-    if(passwordLength === null)   //Check if user wants to cancel the process
-      return;
-    else if(passwordLength < 8 || passwordLength > 128) {   //Check for valid password length
-      alert("This is not a valid password length!");
-      continue;
-    }
-    
-    var includeLowercase = window.confirm("Would you like lowercase letters in your password?");
-    var includeUppercase = window.confirm("Would you like uppercase letters in your password?");
-    var includeNumbers = window.confirm("Would you like numbers in your password?");
-    var includeSpecialCharacters = window.confirm("Would you like special characters in your password?");
-    validInputs = true;
+  var includeLowercase = document.querySelector("#lowercase").checked;
+  var includeUppercase = document.querySelector("#uppercase").checked;
+  var includeNumbers = document.querySelector("#numbers").checked;
+  var includeSpecialCharacters = document.querySelector("#special").checked;
 
-    var choices = [passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters];
+  if(includeLowercase || includeUppercase || includeNumbers || includeSpecialCharacters) {
+    choices = [passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters];
+  } else {
+    alert("You must select at least criteria to include.\nPlease try again.");
   }
 
   return choices;
@@ -71,12 +68,13 @@ generateBtn.addEventListener("click", writePassword);
 
 // Create a copy button if password is not an empty string, remove button if an empty string
 function createCopyButton(pass) {
-  var copyBtn;
+  var copyBtn = null;
   
   // Try to remove copy button if it's present.
   copyBtn = document.getElementById("copy");
-  if(copyBtn)
-    copyBtn.remove;
+  if(copyBtn) {
+    copyBtn.parentElement.removeChild(copyBtn);
+  }
   
   // Generate a copy button if password is not an empty string
   if(pass != "" && !document.getElementById("copy")) {
@@ -96,3 +94,30 @@ function copyPassword() {
   navigator.clipboard.writeText(passwordText.value);
 }
 
+
+// **** Unused Code **** Function for handling prompts and collecting user inputs.
+/*function getUserCriteria() {
+  var validInputs = false;
+
+  //Loop until user inputs valid selections
+  while(!validInputs) {
+    var passwordLength = window.prompt("Please specify the length of your desired password.\nThis should be between 8 and 128 characters.");
+    
+    if(passwordLength === null)   //Check if user wants to cancel the process
+      return;
+    else if(passwordLength < 8 || passwordLength > 128) {   //Check for valid password length
+      alert("This is not a valid password length!");
+      continue;
+    }
+    
+    var includeLowercase = window.confirm("Would you like lowercase letters in your password?");
+    var includeUppercase = window.confirm("Would you like uppercase letters in your password?");
+    var includeNumbers = window.confirm("Would you like numbers in your password?");
+    var includeSpecialCharacters = window.confirm("Would you like special characters in your password?");
+    validInputs = true;
+
+    var choices = [passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters];
+  }
+
+  return choices;
+}*/

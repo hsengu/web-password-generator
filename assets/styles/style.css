@@ -58,6 +58,13 @@ header {
   text-align: center;
 }
 
+.card-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
 .card-footer::before {
   content: " ";
   display: block;
