@@ -1,32 +1,43 @@
-// Assignment code here
+// Function to generate password based on chosen criteria
 function generatePassword() {
   var userChoices = promptUserCriteria();
-  var characterOptions = ["abcdefghijklmnopqrstuvwxyz","0123456789","!@#$%^&*()_-+=~`[]{};\':\",./<>?"];
-  var options = 0;
+  var characterOptions = ["abcdefghijklmnopqrstuvwxyz","1234567890","!@#$%^&*()_-+=~`[]{};\':\",./<>?"];
+  var selectedOptions = "";
+  var password = "";
   
-  for(var countCriteria = 1; countCriteria < userChoices.length; countCriteria++) {
-    if(userChoices[countCriteria]) {
-      options += Math.pow(2,countCriteria - 1);
+  if(userChoices) {
+    for(var countCriteria = 1; countCriteria < userChoices.length; countCriteria++) {
+      if(userChoices[countCriteria]) {
+        if(countCriteria === 2)
+          selectedOptions += characterOptions[countCriteria - 2].toUpperCase();
+        else if(countCriteria > 2)
+          selectedOptions += characterOptions[countCriteria - 2];
+        else
+          selectedOptions += characterOptions[countCriteria - 1];
+      }
+      console.log(selectedOptions);
+    }
+    console.log(userChoices.length + " size of ary");
+
+    for(var length = userChoices[0]; length > 0; length--) {
+      password += selectedOptions.charAt(Math.floor(Math.random() * selectedOptions.length));
     }
   }
-  console.log(userChoices.length + " size of ary");
-  console.log(options);
-
-  for(var length = userChoices[0]; length > 0; length--) {
-    
-  }
   
-  return "Hello!";
+  return password;
 }
 
 // Function for handling prompts and collecting user inputs.
 function promptUserCriteria() {
   var validInputs = false;
 
+  //Loop until user inputs valid selections
   while(!validInputs) {
     var passwordLength = window.prompt("Please enter the length of your desired password.\nThis should be between 8 and 128 characters.");
     
-    if(passwordLength < 8 || passwordLength > 128) {
+    if(passwordLength === null)   //Check if user wants to cancel the process
+      return;
+    else if(passwordLength < 8 || passwordLength > 128) {   //Check for valid password length
       alert("This is not a valid password length!");
       continue;
     }
