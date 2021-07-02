@@ -43,7 +43,7 @@ function getUserCriteria() {
   if(includeLowercase || includeUppercase || includeNumbers || includeSpecialCharacters) {
     choices = [passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters];
   } else {
-    alert("You must select at least criteria to include.\nPlease try again.");
+    alert("You must select at least 1 criteria to include.\nPlease try again.");
   }
 
   return choices;
