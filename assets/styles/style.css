@@ -54,6 +54,14 @@ header {
   min-height: 100px;
 }
 
+.card-body::after {
+  content: " ";
+  display: block;
+  width: 100%;
+  background: #e7e9eb;
+  height: 2px;
+}
+
 .card-footer {
   text-align: center;
 }
@@ -61,8 +69,13 @@ header {
 .card-options {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
+}
+
+.password-length, .password-criteria {
+  margin: 0 auto;
+  padding: 4px;
 }
 
 .card-footer::before {
