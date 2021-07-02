@@ -1,29 +1,27 @@
 // Function to generate password based on chosen criteria
 function generatePassword() {
   var userChoices = promptUserCriteria();
-  var characterOptions = ["abcdefghijklmnopqrstuvwxyz","1234567890","!@#$%^&*()_-+=~`[]{};\':\",./<>?"];
+  var characterOptions = ["abcdefghijklmnopqrstuvwxyz","1234567890","!@#$%^&*()_-+=~`[]{};\':\",./<>?|\\"];
   var selectedOptions = "";
   var password = "";
   
   if(userChoices) {
-    for(var countCriteria = 1; countCriteria < userChoices.length; countCriteria++) {
-      if(userChoices[countCriteria]) {
-        if(countCriteria === 2)
-          selectedOptions += characterOptions[countCriteria - 2].toUpperCase();
-        else if(countCriteria > 2)
-          selectedOptions += characterOptions[countCriteria - 2];
+    for(var checkCriteria = 0; checkCriteria < userChoices.length; checkCriteria++) {
+      if(userChoices[checkCriteria + 1]) {
+        if(checkCriteria === 1)
+          selectedOptions += characterOptions[checkCriteria - 1].toUpperCase();   //If Uppercase is selected
+        else if(checkCriteria > 1)
+          selectedOptions += characterOptions[checkCriteria - 1].toString();    //If Numbers or Symbols are selected
         else
-          selectedOptions += characterOptions[countCriteria - 1];
+          selectedOptions += characterOptions[checkCriteria];    //If Lowercase is selected
       }
-      console.log(selectedOptions);
     }
-    console.log(userChoices.length + " size of ary");
 
     for(var length = userChoices[0]; length > 0; length--) {
       password += selectedOptions.charAt(Math.floor(Math.random() * selectedOptions.length));
     }
   }
-  
+
   return password;
 }
 
@@ -62,9 +60,26 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  // Generate a copy button if password is not an empty string
+  if(password != "") {
+    var copyBtn = document.createElement('button');
+    copyBtn.addEventListener("click", copyPassword);
+    copyBtn.id = "copy";
+    copyBtn.className = "btn";
+    copyBtn.innerHTML = "Copy to Clipboard";
+    document.getElementById("generate").insertAdjacentElement("afterend",copyBtn);
+  }
 
+  passwordText.value = password;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+// Copy password function for copy button
+function copyPassword() {
+  var passwordText = document.querySelector("#password");
+
+  navigator.clipboard.writeText(passwordText.value);
+}
+

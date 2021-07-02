@@ -72,6 +72,10 @@ header {
   clear: both;
 }
 
+#copy {
+  background-color:rgb(18, 90, 197);
+}
+
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);
