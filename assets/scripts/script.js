@@ -94,7 +94,6 @@ function copyPassword() {
   navigator.clipboard.writeText(passwordText.value);
 }
 
-
 // **** Unused Code **** Function for handling prompts and collecting user inputs.
 /*function getUserCriteria() {
   var validInputs = false;
