@@ -1,7 +1,7 @@
 // Function to generate password based on chosen criteria
 function generatePassword() {
   var userChoices = promptUserCriteria();
-  var characterOptions = ["abcdefghijklmnopqrstuvwxyz","1234567890","!@#$%^&*()_-+=~`[]{};\':\",./<>?|\\"];
+  var characterOptions = ["abcdefghijklmnopqrstuvwxyz","1234567890"," !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"];
   var selectedOptions = "";
   var password = "";
   
@@ -60,21 +60,34 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  // Generate a copy button if password is not an empty string
-  if(password != "") {
-    var copyBtn = document.createElement('button');
-    copyBtn.addEventListener("click", copyPassword);
-    copyBtn.id = "copy";
-    copyBtn.className = "btn";
-    copyBtn.innerHTML = "Copy to Clipboard";
-    document.getElementById("generate").insertAdjacentElement("afterend",copyBtn);
-  }
+  // Call createCopyButton function
+  createCopyButton(password);
 
   passwordText.value = password;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+// Create a copy button if password is not an empty string, remove button if an empty string
+function createCopyButton(pass) {
+  var copyBtn;
+  
+  // Try to remove copy button if it's present.
+  copyBtn = document.getElementById("copy");
+  if(copyBtn)
+    copyBtn.remove;
+  
+  // Generate a copy button if password is not an empty string
+  if(pass != "" && !document.getElementById("copy")) {
+    copyBtn = document.createElement('button');
+    copyBtn.addEventListener("click", copyPassword);
+    copyBtn.id = "copy";
+    copyBtn.className = "btn";
+    copyBtn.innerHTML = "Copy to Clipboard";
+    document.getElementById("generate").insertAdjacentElement("afterend",copyBtn);
+  }
+}
 
 // Copy password function for copy button
 function copyPassword() {
