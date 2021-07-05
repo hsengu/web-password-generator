@@ -30,7 +30,7 @@ function getUserCriteria() {
   var choices;
   var passwordLength = document.querySelector("#length-input").value;
   
-  if(passwordLength < 8 || passwordLength > 128) {
+  if(passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     alert("Please specify a valid length of your desired password.\nThis should be between 8 and 128 characters.");
     return;
   }
