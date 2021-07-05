@@ -1,6 +1,6 @@
 # Web Password Generator
 ## Description
-This repository hosts a completed example of [Password Generator Start Code](https://github.com/coding-boot-camp/friendly-parakeet) by The Coding Bootcamp.
+This repository hosts a completed example of [Password Generator Starter Code](https://github.com/coding-boot-camp/friendly-parakeet) by The Coding Bootcamp. Visit the deployed application: [Web Password Generator](https://hsengu.github.io/web-password-generator).
 ## Built With
 - HTML
 - CSS
