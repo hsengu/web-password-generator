@@ -7,7 +7,7 @@ This repository hosts a completed example of [Password Generator Starter Code](h
 - Javascript
 
 ## Screenshot
-![Screenshot](./Screenshots/001.png "Web Password Generator")
+![Screenshot](./assets/Screenshots/001.png "Web Password Generator")
 ## Contributions
 ### [The Coding Bootcamp](https://github.com/coding-boot-camp/)
 - Provided starter code
