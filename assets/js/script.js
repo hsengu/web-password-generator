@@ -17,6 +17,8 @@ function generatePassword() {
       }
     }
 
+    selectedOptions = shuffleString(selectedOptions);   //Shuffle string to mitigate pseudorandom bias
+
     for(var length = userChoices[0]; length > 0; length--) {
       password += selectedOptions.charAt(Math.floor(Math.random() * selectedOptions.length));
     }
@@ -47,6 +49,21 @@ function getUserCriteria() {
   }
 
   return choices;
+}
+
+// Function for shuffle string to make password more randomized to try and eliminate bias
+function shuffleString(pass) {
+  pass = pass.split('');
+
+  for(var i = 0; i < pass.length; i++) {
+    var tempIndex = Math.floor(Math.random() * pass.length);
+    var tempChar = pass[i];
+    pass[i] = pass[tempIndex];
+    pass[tempIndex] = tempChar;
+  }
+
+  pass = pass.join('');
+  return pass;
 }
 
 // Get references to the #generate element
